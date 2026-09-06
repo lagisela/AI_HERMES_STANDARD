@@ -96,7 +96,36 @@ Synthetic acceptance sessions such as repeated `hello.py` or `Say hello` tests s
 
 Standing `/goal` state may resume automatically. When a goal is truly complete or intentionally abandoned, end/cancel it explicitly so later bot turns do not unexpectedly continue old work.
 
-## 8. Messaging and completion notifications
+If an urgent correction invalidates an older queued follow-up or a synthetic standing-goal continuation, explicitly remove/cancel the stale instruction when Hermes exposes that control. Do not allow obsolete queued work to execute later merely because it was already waiting.
+
+## 8. Messaging, course correction and completion notifications
+
+### Busy-input / course-correction rule
+
+Official Hermes behavior is controlled by busy-input mode, not by a magic parser keyword.
+
+Supported semantics:
+- `interrupt` (default): a new message redirects the active turn after any currently running tool reaches a safe boundary; completed tool work/reasoning remains available in context.
+- `queue`: the new message waits as a separate follow-up turn after the current task finishes.
+- `steer`: the new instruction is injected into the current run after the next tool call, without starting a separate turn or hard-canceling the current tool.
+- `/stop`: hard-stop the active foreground turn when cancellation, not redirection, is required.
+
+Hermes exposes the busy-input modes through `/busy interrupt`, `/busy queue`, `/busy steer`, and `/busy status` where supported.
+
+### Operator convention: `CORRECTION:`
+
+For urgent mid-run course corrections, start the message with uppercase `CORRECTION:`. This is a Jarvis operator convention so the model can immediately distinguish a corrective instruction from an ordinary follow-up.
+
+Important: the literal word `CORRECTION:` is **not** documented as the mechanism that bypasses Hermes' queue. Delivery priority comes from the active Hermes busy-input mode. Do not rely on the prefix alone if the session is configured for `queue`.
+
+Recommended use:
+- Use `CORRECTION:` + `interrupt` when the active reasoning/plan must be redirected promptly.
+- Use `CORRECTION:` + `steer` when the current tool/work should finish and the correction should be injected at the next safe boundary.
+- Use `queue` only for genuine follow-up work that is safe to execute later.
+
+Observed operator evidence on 2026-09-06 during `Jellyfish_Visual_MK1`: an urgent correction was incorporated by the active run while an older normal follow-up remained visibly queued. Treat this as useful real-world evidence, but preserve the documented distinction above: busy-input mode defines routing; `CORRECTION:` defines intent.
+
+### Completion notifications
 
 Existing working Hermes/cron completion notifications are sufficient unless a real user-visible gap is observed.
 
@@ -123,4 +152,4 @@ Planning notes, chat, local profile edits and GitHub Issues are provenance, not 
 
 Canonical Jarvis rules live on `main` in this repository after branch -> PR -> review/inspection -> merge.
 
-Related provenance: GitHub Issue #4, `HERMES-BOT-004 — Jarvis Dev bot/profile operating contract and model routing`.
+Related provenance: GitHub Issue #4, `HERMES-BOT-004 — Jarvis Dev bot/profile operating contract and model routing`, and Issue #9, `HERMES-MSG — Canonical busy-input correction / queue / steer behavior`.
