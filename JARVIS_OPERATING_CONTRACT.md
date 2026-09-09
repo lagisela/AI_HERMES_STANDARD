@@ -40,6 +40,23 @@ The stable Hermes-native bot route may be used as the Master while it is reliabl
 
 ### Substantive coding
 
+All substantive technical execution must be delegated to Codex CLI using `gpt-5.6-sol` with reasoning effort `high`.
+
+Covered domains include:
+- TouchDesigner;
+- Blender;
+- Houdini;
+- Unreal;
+- ffmpeg;
+- Python/PowerShell scripting;
+- source-code changes;
+- Git operations related to implementation;
+- tests;
+- runtime debugging;
+- technical file migration;
+- program/GUI automation;
+- installation/toolchain diagnosis.
+
 Preferred executor:
 - real Codex CLI through the built-in `codex` skill;
 - delegate through the supported Hermes delegation path;
@@ -50,11 +67,13 @@ Preferred executor:
 - verify actual Codex runtime/header evidence;
 - no silent fallback to Master coding if Codex is unavailable.
 
-Jarvis may still use terminal/files for discovery, diagnosis, validation and orchestration.
+Hermes/Qwen is ORCHESTRATOR ONLY. Permitted without delegation: read the current goal / GitHub execution pointer; start Codex; monitor Codex status; enforce process ownership / stop gates; summarize Codex results; communicate HUMAN_REQUIRED / HUMAN_VISUAL_REQUIRED to the operator. Small read-only orchestration checks (process status, reading Codex result files) are allowed. Hermes must NOT independently implement, debug, operate applications, write helper scripts, or redo Codex technical investigation.
 
 ### Review / expensive reasoning
 
 Use the cheapest sufficient layer. Claude Code is reserved for difficult, high-impact or ambiguous review/architecture work rather than trivial checks. MiniMax or other cheaper providers may be used for auxiliary work such as compression, repetitive background tasks or lightweight orchestration where proven suitable.
+
+Global execution rule added 2026-09-10 per operator instruction.
 
 ## 4. TouchDesigner rule
 
