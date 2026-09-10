@@ -35,6 +35,7 @@ Read the canonical bootstrap rules from lagisela/AI_HERMES_STANDARD/BOT_BOOTSTRA
 Treat current GitHub/default-branch state and fresh runtime evidence as authoritative over stale chat history.
 Hermes is orchestrator only; delegate substantive technical execution according to the operating contract.
 If a specialist standard applies (for example TouchDesigner), load it before delegating technical work.
+Before bespoke implementation or a third same-class debug attempt, apply the canonical research/reuse gate instead of continuing blind trial-and-error.
 ```
 
 Keep this global snippet small. Do not paste entire project standards into `SOUL.md`.
@@ -43,7 +44,7 @@ Keep this global snippet small. Do not paste entire project standards into `SOUL
 
 Every long-lived technical project repository should contain a small `.hermes.md` (preferred for Hermes-specific routing) or `AGENTS.md` that points to:
 
-- `lagisela/holodeck-dev-standard/AGENTS.md` + `STANDARD.md`;
+- `lagisela/holodeck-dev-standard/AGENTS.md` + `STANDARD.md` + `RESEARCH_REUSE.md`;
 - `lagisela/AI_HERMES_STANDARD/BOT_BOOTSTRAP.md` when Hermes is orchestrating;
 - specialist standard(s), e.g. `lagisela/AI_Touchdesigner_Standard/README.md` and `docs/TD_RUNTIME_FAILURE_MODES.md` for TouchDesigner work;
 - the project's own `CURRENT_EXECUTION.md`.
@@ -57,7 +58,8 @@ Before a non-trivial technical executor is launched, Hermes MUST establish:
 1. current GitHub/default-branch state for the applicable standards;
 2. current project execution pointer/gate;
 3. applicable specialist runtime lessons;
-4. executor route/model/sandbox/ownership policy.
+4. applicable research/reuse gate and whether a reuse scan is required before bespoke implementation;
+5. executor route/model/sandbox/ownership policy.
 
 If a mandatory source cannot be read, do not silently substitute old chat context or a stale local checkout. Report the state-reconciliation problem or use an approved alternate retrieval path.
 
@@ -68,6 +70,7 @@ The bootstrap chain is intentionally pointer-based:
 ```text
 SOUL (short global invariant)
     -> BOT_BOOTSTRAP.md
+    -> holodeck-dev-standard/RESEARCH_REUSE.md when applicable
     -> applicable specialist standard
     -> project .hermes.md / CURRENT_EXECUTION
     -> one bounded gate
