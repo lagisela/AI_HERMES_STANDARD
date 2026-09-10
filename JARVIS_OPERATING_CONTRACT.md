@@ -36,11 +36,11 @@ Jarvis is not automatically the substantive coder.
 
 Model assignments are configuration, not permanent vendor truth.
 
-The stable Hermes-native bot route may be used as the Master while it is reliable. A local Qwen route may be selected through supported Hermes UI/profile controls when desired and verified. Do not silently mutate the default Hermes bot merely because a separate experimental bot uses a different model.
+The stable Hermes-native bot route may be used as the Master while it is reliable. A local or cheaper model route may be selected through supported Hermes UI/profile controls when desired and verified. Do not silently mutate the default Hermes bot merely because a separate experimental bot uses a different model.
 
-### Substantive coding
+### Substantive technical execution
 
-All substantive technical execution must be delegated to Codex CLI using `gpt-5.6-sol` with reasoning effort `high`.
+All substantive technical execution must be delegated to Codex CLI using `gpt-5.6-sol` with reasoning effort `high`, unless this canonical contract is intentionally changed.
 
 Covered domains include:
 - TouchDesigner;
@@ -62,22 +62,40 @@ Preferred executor:
 - delegate through the supported Hermes delegation path;
 - expected model: `gpt-5.6-sol` unless intentionally changed;
 - reasoning effort: `high`;
-- sandbox: `workspace-write`;
+- sandbox: `workspace-write` by default;
 - approval: `on-request`;
 - verify actual Codex runtime/header evidence;
 - no silent fallback to Master coding if Codex is unavailable.
 
-Hermes/Qwen is ORCHESTRATOR ONLY. Permitted without delegation: read the current goal / GitHub execution pointer; start Codex; monitor Codex status; enforce process ownership / stop gates; summarize Codex results; communicate HUMAN_REQUIRED / HUMAN_VISUAL_REQUIRED to the operator. Small read-only orchestration checks (process status, reading Codex result files) are allowed. Hermes must NOT independently implement, debug, operate applications, write helper scripts, or redo Codex technical investigation.
+### Native-GUI sandbox exception
+
+`workspace-write` is the default, not a dogma. If fresh evidence proves that the sandbox itself prevents the required native application runtime/GUI behavior, a narrowly bounded `danger-full-access` Codex run may be used for that specific executor task when authorized. It must preserve exact process ownership, avoid unrelated machine changes and return to the least-privileged route afterward.
+
+For TouchDesigner, current observed failure modes and the evidence threshold for this exception are documented in `lagisela/AI_Touchdesigner_Standard/docs/TD_RUNTIME_FAILURE_MODES.md`.
+
+Do not diagnose the product/application as broken until the selected executor route is itself proven capable of the required runtime surface.
+
+Hermes/master model is ORCHESTRATOR ONLY. Permitted without delegation: read the current goal / GitHub execution pointer; establish canonical state; start Codex; monitor Codex status; enforce process ownership / stop gates; evaluate evidence; summarize Codex results; communicate HUMAN_REQUIRED / HUMAN_VISUAL_REQUIRED to the operator. Small read-only orchestration checks (process status, reading Codex result files) are allowed. Hermes must NOT independently implement, debug, operate applications, write helper scripts, perform implementation Git commits, or redo Codex technical investigation.
 
 ### Review / expensive reasoning
 
-Use the cheapest sufficient layer. Claude Code is reserved for difficult, high-impact or ambiguous review/architecture work rather than trivial checks. MiniMax or other cheaper providers may be used for auxiliary work such as compression, repetitive background tasks or lightweight orchestration where proven suitable.
+Use the cheapest sufficient layer. Claude is reserved for difficult, high-impact or ambiguous review/architecture work rather than trivial checks.
+
+When Codex is genuinely stuck after bounded diagnosis/repair and targeted research, use the existing Hermes `/review` route with Claude Sonnet 5 Thinking HIGH where available, then feed the review findings back to Codex for the repair cycle. The Master/Orchestrator must not substitute its own technical implementation for this escalation path.
+
+Other cheaper providers may be used for lightweight orchestration where proven suitable, but provider/model experiments must not change executor truth or bypass acceptance gates.
 
 Global execution rule added 2026-09-10 per operator instruction.
 
 ## 4. TouchDesigner rule
 
-Before TouchDesigner launch/bootstrap/process work, use the supported `touchdesigner-project-development` skill.
+Before TouchDesigner launch/bootstrap/process work, use the supported `touchdesigner-project-development` skill and read the current reusable TD standard.
+
+Mandatory TD preflight includes:
+- `lagisela/AI_Touchdesigner_Standard/README.md`;
+- `lagisela/AI_Touchdesigner_Standard/docs/TD_RUNTIME_FAILURE_MODES.md`;
+- `lagisela/AI_Touchdesigner_Standard/docs/CURRENT_EXECUTION.md`;
+- the target project's current execution pointer.
 
 If the skill is not available to the active bot/profile:
 - first make the existing canonical skill available through the supported Hermes skill mechanism;
@@ -86,7 +104,7 @@ If the skill is not available to the active bot/profile:
 
 Application lifecycle rules must preserve exact owned process identity and must never globally kill TouchDesigner processes.
 
-A one-time manual Textport seam is acceptable as an interim first-creation mechanism per project. A later dedicated acceptance task should prove zero-human first creation from a fresh project; do not block current product work on that improvement.
+A one-time manual Textport seam is acceptable as an interim first-creation mechanism per project. A later dedicated acceptance task should prove zero-human first creation from a fresh project; do not block unrelated product work on that improvement unless the current canonical gate explicitly requires it.
 
 ## 5. Human gates
 
@@ -102,10 +120,11 @@ Technical/runtime PASS is not Human Visual/Product PASS. For visual TouchDesigne
 - Bind owned processes using PID plus creation/start time and executable/path identity where possible.
 - Inspect dirty Git state before executor work.
 - Do not reset/clean/reclone destructively without explicit need and authority.
-- No admin elevation, CUA or broad machine control unless the task genuinely requires it and the human explicitly authorizes it.
+- No admin elevation, CUA or broad machine control unless the task genuinely requires it and the human has authorized that capability/task boundary.
+- A broader sandbox does not authorize unrelated machine changes.
 - No silent model/provider fallback.
 
-## 7. Session hygiene
+## 7. Session and context hygiene
 
 One human-level project goal should normally map to one primary visible master session.
 
@@ -113,9 +132,22 @@ Internal work should prefer tasks, background processes, supported subagents/del
 
 Synthetic acceptance sessions such as repeated `hello.py` or `Say hello` tests should be avoided once the relevant path has real product evidence.
 
-Standing `/goal` state may resume automatically. When a goal is truly complete or intentionally abandoned, end/cancel it explicitly so later bot turns do not unexpectedly continue old work.
+Standing `/goal` state may resume automatically. When a goal is truly complete or intentionally abandoned, end/cancel it explicitly so later bot turns do not unexpectedly continue old work. `/goal pause` / `/goal resume` may preserve intentional work across a restart, but resumed work must reconcile current GitHub/disk/runtime state before continuing if the environment may have changed.
 
 If an urgent correction invalidates an older queued follow-up or a synthetic standing-goal continuation, explicitly remove/cancel the stale instruction when Hermes exposes that control. Do not allow obsolete queued work to execute later merely because it was already waiting.
+
+### Automatic bootstrap context
+
+The operator should not have to paste the standard hierarchy into every goal.
+
+Use Hermes-native context surfaces:
+- short, stable global role/bootstrap invariant in the active bot/profile `SOUL.md` / Custom SOUL;
+- project `.hermes.md` (preferred) or `AGENTS.md` pointers for project/specialist standards;
+- current GitHub documents retrieved at runtime rather than copied into long prompts.
+
+Canonical design and one-time setup: `docs/AUTOMATIC_CONTEXT_BOOTSTRAP.md`.
+
+A mandatory source that cannot be read is a state-reconciliation blocker; stale chat history is not an acceptable substitute.
 
 ## 8. Messaging, course correction and completion notifications
 
@@ -164,6 +196,8 @@ Verify the thing that matters:
 - actual notification delivery;
 - actual application/runtime evidence;
 - actual visual/product result when relevant.
+
+Do not repeat a gate already documented PASS unless fresh contradictory evidence exists or explicit revalidation is requested.
 
 ## 10. Canonical promotion
 
